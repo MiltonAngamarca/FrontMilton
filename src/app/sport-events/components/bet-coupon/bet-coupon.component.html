@@ -1,0 +1,24 @@
+<div class="p-6 bg-blue-100 border border-blue-400 rounded-md shadow-md">
+  <h3 class="text-xl font-semibold mb-4">Resumen de Apuestas</h3>
+  
+
+  <div *ngIf="bets.length === 0" class="text-gray-500">
+    No has realizado ninguna apuesta en esta sesión.
+  </div>
+  
+  <div *ngIf="bets.length > 0" class="space-y-4">
+    <div *ngFor="let bet of bets" class="p-4 bg-green-100 border border-green-400 rounded-md shadow-sm">
+      <p><strong>Evento:</strong> {{ bet.eventName }}</p>
+      <p><strong>Monto:</strong> {{ bet.amount | currency:'USD' }}</p>
+      <p><strong>Resultado Seleccionado:</strong> {{ bet.selectedResult }}</p>
+      <p><strong>Cuota:</strong> {{ bet.odds }}</p>
+      <p><strong>Ganancia Potencial:</strong> {{ bet.potentialGain | currency:'USD' }}</p>
+      <p><strong>Fecha:</strong> {{ bet.createdAt | date: 'short' }}</p>
+    </div>
+
+    <div class="p-4 bg-blue-200 border border-blue-500 rounded-md shadow-sm">
+      <p class="font-semibold">Total Ganancias Potenciales:</p>
+      <p>{{ totalPotentialGain | currency:'USD' }}</p>
+    </div>
+  </div>
+</div>

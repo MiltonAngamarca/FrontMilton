@@ -1,0 +1,84 @@
+<div class="flex flex-col md:flex-row">
+  <div class="flex-1 overflow-x-auto">
+    <table class="table-auto w-full border-collapse border border-gray-300">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="border px-4 py-2">Equipos</th>
+          <th class="border px-4 py-2">Fecha y Hora</th>
+          <th class="border px-4 py-2">Estado</th>
+          <th class="border px-4 py-2 text-center">1</th>
+          <th class="border px-4 py-2 text-center">X</th>
+          <th class="border px-4 py-2 text-center">2</th>
+          <th class="border px-4 py-2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (filteredEvents.length === 0) {
+          <tr>
+            <td colspan="7" class="border px-4 py-2 text-center text-gray-500">
+              No se encontraron eventos
+            </td>
+          </tr>
+        }
+        @if (filteredEvents.length > 0) {
+          @for ( event of filteredEvents; track event.eventId) {
+            <tr class="odd:bg-white even:bg-gray-50">
+              <td class="border px-4 py-2">
+                {{ event.competitorHome.competitorName.es }} vs.
+                {{ event.competitorAway.competitorName.es }}
+              </td>
+              <td class="border px-4 py-2">
+                {{ event.scheduled | date: 'short' }}
+              </td>
+              <td class="border px-4 py-2 capitalize">
+                {{ event.eventStatus.statusEventSport | translateStatus }}
+              </td>
+              <td class="border px-4 py-2 text-center">
+                {{ getOdds(event, '1') | number:'1.2-2' }}
+              </td>
+              <td class="border px-4 py-2 text-center">
+                {{ getOdds(event, 'X') | number:'1.2-2' }}
+              </td>
+              <td class="border px-4 py-2 text-center">
+                {{ getOdds(event, '2') | number:'1.2-2' }}
+              </td>
+              <td class="border px-4 py-2">
+                <button
+                  (click)="openBetModal(event)"
+                  [disabled]="isBetting[event.eventId]"
+                  class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition-colors disabled:bg-green-300"
+                >
+                  @if (!isBetting[event.eventId]) {
+                    Apostar
+                  }
+                  @if (isBetting[event.eventId]) {
+                    <span class="loader"></span>
+                  }
+                </button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="w-full md:w-1/3 md:ml-4 mt-4 md:mt-0">
+    <app-bet-coupon 
+      [bets]="bets" 
+      [totalPotentialGain]="calculateTotalPotentialGain()">
+    </app-bet-coupon>
+  </div>
+</div>
+
+@if (showModal && selectedEvent) {
+  <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <app-bet-modal
+        [data]="{ event: selectedEvent }"
+        (close)="closeModal()"
+        (submitBet)="handleSubmitBet($event)"
+      ></app-bet-modal>
+    </div>
+  </div>
+}

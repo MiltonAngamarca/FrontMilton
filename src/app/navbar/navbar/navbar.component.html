@@ -1,0 +1,72 @@
+<nav class="bg-blue-600 text-white">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Nombre de la Aplicación -->
+    <div class="text-xl font-bold">
+      <a routerLink="/events">SportEvents</a>
+    </div>
+
+    <!-- Enlaces de Navegación -->
+    <div class="space-x-4 hidden md:block">
+      <a
+        routerLink="/events"
+        routerLinkActive="underline"
+        class="hover:underline"
+      >
+        Eventos
+      </a>
+      <a
+        routerLink="/bet-history"
+        routerLinkActive="underline"
+        class="hover:underline"
+      >
+        Historial de Apuestas
+      </a>
+      @if (isLoggedIn) {
+        <button
+          (click)="logout()"
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Cerrar Sesión
+        </button>
+      }
+    </div>
+
+    <!-- Botón de Menú para Mobile -->
+    <div class="md:hidden">
+      <button (click)="toggleMenu()" class="focus:outline-none">
+        <i class="fa-solid fa-bars fa-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Enlaces de Navegación en Mobile -->
+  <div
+    [ngClass]="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }"
+    class="md:hidden bg-blue-500"
+  >
+    <a
+      routerLink="/events"
+      routerLinkActive="underline"
+      class="block px-4 py-2 hover:bg-blue-700"
+      (click)="closeMenu()"
+    >
+      Eventos
+    </a>
+    <a
+      routerLink="/bet-history"
+      routerLinkActive="underline"
+      class="block px-4 py-2 hover:bg-blue-700"
+      (click)="closeMenu()"
+    >
+      Historial de Apuestas
+    </a>
+    @if (isLoggedIn) {
+      <button
+        (click)="logout()"
+        class="block px-4 py-2 bg-red-500 hover:bg-red-600 text-white"
+      >
+        Cerrar Sesión
+      </button>
+    }
+  </div>
+</nav>

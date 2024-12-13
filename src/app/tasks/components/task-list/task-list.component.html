@@ -1,0 +1,42 @@
+<div class="mb-6 flex justify-end">
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded"
+    (click)="openTaskModal()"
+  >
+    Crear Nueva Tarea
+  </button>
+</div>
+
+<app-task-modal (taskCreated)="reloadTasks()"></app-task-modal>
+
+<div class="overflow-x-auto">
+  <table class="table-auto w-full border-collapse border border-gray-300">
+    <thead class="bg-gray-200">
+      <tr>
+        @for (column of ['Título', 'Descripción', 'Estado', 'Fecha']; track $index) {
+        <th class="border px-4 py-2">{{ column }}</th>
+        }
+      </tr>
+    </thead>
+    @if (filteredTasks.length === 0) {
+    <tbody class="text-center">
+      <tr>
+        <td colspan="4" class="border px-4 py-2 text-gray-500">
+          No se encontraron tareas
+        </td>
+      </tr>
+    </tbody>
+    } @else {
+    <tbody>
+      @for (task of filteredTasks; track $index) {
+      <tr class="odd:bg-white even:bg-gray-50">
+        <td class="border px-4 py-2">{{ task.title }}</td>
+        <td class="border px-4 py-2">{{ task.description }}</td>
+        <td class="border px-4 py-2">{{ task.status }}</td>
+        <td class="border px-4 py-2">{{ task.dueDate | date: 'shortDate' }}</td>
+      </tr>
+      }
+    </tbody>
+    }
+  </table>
+</div>

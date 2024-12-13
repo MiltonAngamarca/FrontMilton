@@ -1,0 +1,71 @@
+<h2 class="text-2xl font-semibold mb-4 text-center">Realizar Apuesta</h2>
+<form (ngSubmit)="onSubmit()" class="space-y-4">
+  <div>
+    <p class="text-gray-700">
+      <strong>Evento:</strong>
+      {{ data.event.competitorHome.competitorName.es }} vs.
+      {{ data.event.competitorAway.competitorName.es }}
+    </p>
+    <p class="text-gray-700">
+      <strong>Fecha y Hora:</strong> {{ data.event.scheduled | date: 'short' }}
+    </p>
+  </div>
+
+  <div>
+    <label for="amount" class="block text-sm font-medium text-gray-700">Monto de la Apuesta:</label>
+    <input
+      type="number"
+      id="amount"
+      name="amount"
+      [(ngModel)]="amount"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Ingrese el monto"
+      min="1"
+      required
+      #amountInput="ngModel"
+    />
+    @if (amountInput.invalid && (amountInput.dirty || amountInput.touched)) {
+      <div class="text-red-500 text-sm mt-1">
+        Monto requerido y debe ser mayor que 0.
+      </div>
+    }
+  </div>
+
+  <div>
+    <label for="result" class="block text-sm font-medium text-gray-700">Seleccionar Resultado:</label>
+    <select
+      id="result"
+      name="selectedResult"
+      [(ngModel)]="selectedResult"
+      class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+      required
+      #resultSelect="ngModel"
+    >
+      <option value="1">1 - {{ data.event.competitorHome.competitorName.es }}</option>
+      <option value="X">X - Empate</option>
+      <option value="2">2 - {{ data.event.competitorAway.competitorName.es }}</option>
+    </select>
+    @if (resultSelect.invalid && (resultSelect.dirty || resultSelect.touched)) {
+      <div class="text-red-500 text-sm mt-1">
+        Seleccione un resultado válido.
+      </div>
+    }
+  </div>
+
+  <div class="flex justify-end space-x-2">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      [disabled]="amount <= 0"
+      class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300"
+    >
+      Apostar
+    </button>
+  </div>
+</form>

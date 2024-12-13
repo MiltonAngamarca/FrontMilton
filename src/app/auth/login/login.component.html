@@ -1,0 +1,48 @@
+<div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 mt-20">
+  <h2 class="text-2xl font-bold mb-4">Iniciar Sesión</h2>
+  <form (submit)="login()">
+    <label class="block mb-2">
+      Correo Electrónico:
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        class="w-full p-2 border rounded"
+        required
+      />
+    </label>
+    <label class="block mb-4 relative">
+      Contraseña:
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        name="password"
+        class="w-full p-2 border rounded pr-10"
+        required
+      />
+      <button
+        type="button"
+        class="absolute right-2 top-2/3 transform -translate-y-1/2 flex items-center justify-center"
+        (click)="togglePasswordVisibility()"
+      >
+        <i
+          class="fa-solid"
+          [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+        ></i>
+      </button>
+    </label>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+      Ingresar
+    </button>
+  </form>
+  <div class="mt-4 text-center">
+    <span>¿No tienes cuenta?</span>
+    <button
+      class="text-blue-500 underline"
+      type="button"
+      (click)="navigateToRegister()"
+    >
+      Regístrate
+    </button>
+  </div>
+</div>

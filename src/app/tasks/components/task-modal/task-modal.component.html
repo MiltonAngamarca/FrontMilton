@@ -1,0 +1,42 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center" *ngIf="isVisible">
+  <div class="bg-white p-6 rounded-lg shadow-md w-1/3">
+    <h2 class="text-xl font-bold mb-4">Crear Nueva Tarea</h2>
+    <form (submit)="createTask()" class="grid gap-4">
+      <input
+        type="text"
+        placeholder="Título"
+        [(ngModel)]="newTask.title"
+        name="title"
+        required
+        class="p-2 border rounded"
+      />
+      <textarea
+        placeholder="Descripción"
+        [(ngModel)]="newTask.description"
+        name="description"
+        required
+        class="p-2 border rounded"
+      ></textarea>
+      <input
+        type="date"
+        [(ngModel)]="newTask.dueDate"
+        name="dueDate"
+        required
+        class="p-2 border rounded"
+      />
+      <select [(ngModel)]="newTask.status" name="status" class="p-2 border rounded">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En Proceso">En Proceso</option>
+        <option value="Completada">Completada</option>
+      </select>
+      <div class="flex justify-end gap-4">
+        <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded" (click)="closeModal()">
+          Cancelar
+        </button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+          Crear
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="flex items-center mb-4">
+  <input
+    type="text"
+    placeholder="Filtrar tareas por título..."
+    [(ngModel)]="filterText"
+    (input)="onFilterChange()"
+    class="flex-1 p-2 border rounded"
+  />
+  @if (filterText) {
+  <button
+    class="ml-2 p-2 bg-red-500 text-white rounded"
+    (click)="filterText = ''; onFilterChange()"
+  >
+    Limpiar
+  </button>
+  }
+</div>

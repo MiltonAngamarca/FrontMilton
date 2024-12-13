@@ -1,27 +1,41 @@
-# TaskManager
+FrontMilton
+Este proyecto es una aplicación Angular generada con Angular CLI versión 18.2.3. El propósito de esta aplicación es gestionar tareas y apuestas deportivas, permitiendo a los usuarios realizar y filtrar apuestas.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+Requisitos Previos
+Antes de comenzar, asegúrate de que tu entorno de desarrollo cumpla con los siguientes requisitos:
 
-## Development server
+Node.js: Requiere la versión 18 o superior. Puedes descargarlo desde Node.js.
+npm: Incluido con Node.js.
+Angular CLI: Debe estar instalado globalmente. Instálalo con el siguiente comando:
+bash
+Copiar código
+npm install -g @angular/cli
+Instalación
+Clonar el Repositorio
+Clona este repositorio en tu máquina local:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+bash
+Copiar código
+git clone https://github.com/MiltonAngamarca/FrontMilton.git
+cd FrontMilton
+Instalar Dependencias
+Ejecuta el siguiente comando para instalar las dependencias del proyecto:
 
-## Code scaffolding
+bash
+Copiar código
+npm install
+Configurar Variables de Entorno
+Si el proyecto requiere configuraciones específicas (como API Keys o URLs), configura las variables en los archivos de entorno local (src/environments/environment.ts) según sea necesario.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Ejecución del Proyecto
+Servidor de Desarrollo
+Ejecuta el siguiente comando para iniciar un servidor de desarrollo:
 
-## Build
+bash
+Copiar código
+ng serve
+Accede a la aplicación en tu navegador en la URL:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+arduino
+Copiar código
+http://localhost:4200

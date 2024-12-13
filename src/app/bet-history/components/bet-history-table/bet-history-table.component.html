@@ -1,0 +1,48 @@
+<!-- src/app/components/bet-history-table/bet-history-table.component.html -->
+<div class="flex flex-col">
+  <!-- Indicador de Carga -->
+  <div *ngIf="isLoading" class="text-center">
+    <p class="text-gray-700">Cargando historial de apuestas...</p>
+  </div>
+
+  <!-- Mensaje de Error -->
+  <div *ngIf="errorMessage" class="text-center text-red-500 mb-4">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Tabla de Historial de Apuestas -->
+  <div *ngIf="!isLoading && betHistory.length > 0" class="overflow-x-auto">
+    <table class="min-w-full bg-white border">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 border-b">Evento</th>
+          <th class="py-2 px-4 border-b">Monto</th>
+          <th class="py-2 px-4 border-b">Resultado Seleccionado</th>
+
+          <th class="py-2 px-4 border-b">Ganancia Potencial</th>
+          <th class="py-2 px-4 border-b">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bet of betHistory" class="text-center">
+          <td class="py-2 px-4 border-b">{{ bet.eventName }}</td>
+          <td class="py-2 px-4 border-b">
+            {{ bet.amount | currency : 'USD' : 'symbol' : '1.2-2' }}
+          </td>
+          <td class="py-2 px-4 border-b">{{ bet.selectedResult }}</td>
+          <td class="py-2 px-4 border-b">
+            {{ bet.potentialGain | currency : 'USD' : 'symbol' : '1.2-2' }}
+          </td>
+          <td class="py-2 px-4 border-b">
+            {{ bet.createdAt | date : 'short' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mensaje cuando no hay apuestas -->
+  <div *ngIf="!isLoading && betHistory.length === 0" class="text-center">
+    <p class="text-gray-700">No tienes apuestas registradas.</p>
+  </div>
+</div>
